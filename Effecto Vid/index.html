@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="OmniVision monitorea, analiza e interpreta el comportamiento humano ante posibles amenazas impulsado por IA." />
+  <link id="dynamic-favicon" rel="icon" href="logos/Isotipo.webp" type="image/webp" />
+  <title>OmniVision — Convierte Cualquier Cámara en un Vigilante Inteligente</title>
+
+  <!-- Google Fonts: Urbanist -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;600&display=swap" rel="stylesheet" />
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- ScrollReveal CDN -->
+  <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       LOADER SCREEN
+  ═══════════════════════════════════════════ -->
+  <div id="loader">
+    <div id="loader-logo">
+      <img id="loader-isotipo" src="logos/Isotipo.webp" alt="OmniVision Isotipo" />
+      <div id="loader-logotipo-clip">
+        <img id="loader-logotipo" src="logos/Logotipo.webp" alt="OmniVision" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN SITE
+  ═══════════════════════════════════════════ -->
+  <div id="site" class="hidden">
+
+    <!-- NAV -->
+    <nav id="navbar">
+      <div class="nav-left">
+        <a href="#caracteristicas" class="nav-link" id="nav-caracteristicas">Características</a>
+        <a href="#nosotros" class="nav-link" id="nav-nosotros">Vision-Box</a>
+      </div>
+      <div class="nav-center">
+        <a href="#" id="nav-logo-link">
+          <img src="logos/Isotipo.webp" alt="OmniVision" id="nav-isotipo" />
+        </a>
+      </div>
+      <div class="nav-right">
+        <a href="#login" class="nav-link" id="nav-login">Iniciar Sesión</a>
+        <a href="#contacto" class="nav-btn" id="nav-contacto">Contacto</a>
+      </div>
+      
+      <!-- Mobile Hamburger (Left) -->
+      <button class="mobile-menu-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Mobile Login Icon (Right) -->
+      <div class="mobile-login" aria-label="Menu de Usuario">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        <div class="user-dropdown">
+          <a href="#login">Iniciar Sesión</a>
+          <a href="#registro">Registrarse</a>
+          <a href="#dashboard">Mi Panel</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ── MOBILE FULLSCREEN MENU ── -->
+    <div id="mobile-menu-overlay">
+      <div class="mobile-menu-content">
+        <a href="#caracteristicas" class="mobile-nav-link">Características</a>
+        <a href="#nosotros" class="mobile-nav-link">Vision-Box</a>
+        <a href="#login" class="mobile-nav-link">Iniciar Sesión</a>
+        <a href="#contacto" class="mobile-nav-link">Contacto</a>
+      </div>
+      <div class="mobile-menu-footer">
+        <img src="logos/Isotipo.webp" alt="OmniVision" />
+      </div>
+    </div>
+
+    <!-- ── HERO ─────────────────────────────────── -->
+    <section id="hero">
+      <div class="hero-content">
+        <h1 id="hero-heading">
+          <span class="line-mask"><span class="line-inner line-light">Convierte Cualquier Cámara</span></span>
+          <span class="line-mask"><span class="line-inner line-bold">En un Vigilante Inteligente</span></span>
+        </h1>
+        <p id="hero-sub">
+          <span class="word-mask"><span class="word-inner">OmniVision</span></span>
+          <span class="word-mask"><span class="word-inner">monitorea,</span></span>
+          <span class="word-mask"><span class="word-inner">analiza</span></span>
+          <span class="word-mask"><span class="word-inner">e</span></span>
+          <span class="word-mask"><span class="word-inner">interpreta</span></span>
+          <span class="word-mask"><span class="word-inner">el</span></span>
+          <span class="word-mask"><span class="word-inner">comportamiento</span></span>
+          <span class="word-mask"><span class="word-inner">humano</span></span>
+          <span class="word-mask"><span class="word-inner">ante</span></span>
+          <span class="word-mask"><span class="word-inner">posibles</span></span>
+          <span class="word-mask"><span class="word-inner">amenazas</span></span>
+          <span class="word-mask"><span class="word-inner">impulsado</span></span>
+          <span class="word-mask"><span class="word-inner">por</span></span>
+          <span class="word-mask"><span class="word-inner">IA</span></span>
+        </p>
+        <a href="#caracteristicas" class="mobile-hero-btn">
+          <span>Explorar Plataforma</span>
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+      </div>
+      <div id="dashboard-wrapper">
+        <div id="dashboard-glow"></div>
+        <img id="dashboard-img" src="img/dashboard.webp" alt="OmniVision Dashboard" />
+      </div>
+    </section>
+
+    <!-- ── NOSOTROS / ABOUT ──────────────────────── -->
+    <section id="nosotros">
+      <div class="nosotros-inner">
+        <div class="nosotros-left">
+          <div class="nosotros-tags" id="about-tags">
+            <span class="tag" id="tag-impacto">Impacto Comprobado</span>
+            <span class="tag" id="tag-ai">AI</span>
+          </div>
+        </div>
+        <div class="nosotros-right">
+          <h2 class="nosotros-title" id="about-title">
+            <span class="line-mask"><span class="line-inner">Una Visión En <strong>Todo Lugar</strong></span></span>
+          </h2>
+          <p class="nosotros-desc" id="about-desc">
+            <strong>transformando cualquier cámara en IA</strong>
+            con análisis en tiempo real, <em>100% privado</em>
+            y sin depender de la nube.
+          </p>
+        </div>
+      </div>
+
+      <!-- MARQUEE INFINITO -->
+      <div class="marquee-wrapper" id="marquee-wrapper">
+        <div class="marquee-track" id="marquee-track">
+          <span class="marquee-text">
+            Donde la <strong>Intuición Humana</strong> se Encuentra con la <strong>Precisión</strong> de la
+            <strong>IA</strong>&nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
+          </span>
+          <span class="marquee-text">
+            Donde la <strong>Intuición Humana</strong> se Encuentra con la <strong>Precisión</strong> de la
+            <strong>IA</strong>&nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SEQUENCE ANIMATION ─────────────── -->
+    <section class="hero-sequence" id="sequence-section">
+      <canvas id="sequence-canvas"></canvas>
+      <div class="sequence-text" id="sequence-text">
+        <h2 id="seq-words">
+          <span class="seq-word">Precisión</span>
+          <span class="seq-word">Inigualable</span>
+          <span class="seq-word"><strong>en</strong></span>
+          <span class="seq-word"><strong>Cada</strong></span>
+          <span class="seq-word"><strong>Momento.</strong></span>
+        </h2>
+      </div>
+    </section>
+
+    <!-- ── FEATURES / CARACTERÍSTICAS ─────────────── -->
+    <section id="caracteristicas">
+      <div class="features-grid">
+
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="feat-col col-left">
+
+          <!-- Card 1 -->
+          <article class="feat-card" id="feat-01">
+            <div class="feat-img-wrap">
+              <img src="img/feat-01.webp" alt="Análisis 24/7" />
+            </div>
+            <div class="feat-body">
+              <p class="feat-desc">
+                <strong>Analiza 24/7 sin pausas.</strong>
+                <span class="feat-text">Procesa cada fotograma en el Edge con YOLOv8, detectando eventos críticos apenas
+                  ocurren, sin depender de la nube.</span>
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="feat-card" id="feat-03">
+            <div class="feat-img-wrap">
+              <img src="img/feat-03.webp" alt="Procesamiento local" />
+            </div>
+            <div class="feat-body">
+              <p class="feat-desc">
+                <strong>100% procesado en sitio.</strong>
+                <span class="feat-text">El Vision-Box decodifica y analiza el vídeo localmente, así los datos sensibles
+                  nunca salen de tu red.</span>
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="feat-card" id="feat-05">
+            <div class="feat-img-wrap">
+              <img src="img/feat-05.webp" alt="4 canales simultáneos" />
+            </div>
+            <div class="feat-body">
+              <p class="feat-desc">
+                <strong>Monitorea hasta 4 canales a la vez.</strong>
+                <span class="feat-text">Cada entrada BNC del Vision-Box procesa su propio stream en paralelo, sin perder
+                  fluidez ni sincronía.</span>
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- COLUMNA DERECHA -->
+        <div class="feat-col col-right">
+
+          <!-- Card 2 -->
+          <article class="feat-card" id="feat-02">
+            <div class="feat-img-wrap">
+              <img src="img/feat-02.webp" alt="Modelo adaptable" />
+            </div>
+            <div class="feat-body">
+              <p class="feat-desc">
+                <strong>Adapta el modelo a tu operación.</strong>
+                <span class="feat-text">Cambia los parámetros de detección según el entorno: logística, seguridad o
+                  instalaciones críticas.</span>
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="feat-card" id="feat-04">
+            <div class="feat-img-wrap">
+              <img src="img/feat-04.webp" alt="Ahorro de ancho de banda" />
+            </div>
+            <div class="feat-body">
+              <p class="feat-desc">
+                <strong>Ahorra ancho de banda y costos cloud.</strong>
+                <span class="feat-text">Al procesar todo en el Edge, solo se envían alertas relevantes, no vídeo
+                  constante a servidores externos.</span>
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="feat-card" id="feat-06">
+            <div class="feat-img-wrap">
+              <img src="img/feat-06.webp" alt="Alertas con IA" />
+            </div>
+            <div class="feat-body">
+              <p class="feat-desc">
+                <strong>Alertas con contexto generado por IA.</strong>
+                <span class="feat-text">Gemini LLM redacta automáticamente una descripción de cada clip
+                  detectado.</span>
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── OMNIBOX SECTION ─────────────── -->
+    <section id="omnibox">
+      <div class="omnibox-bg">
+        <picture>
+          <source media="(max-width: 768px)" srcset="img/omniboxphone.webp">
+          <img src="img/omnibox.webp" alt="Vision Box Edge" />
+        </picture>
+      </div>
+      <div class="omnibox-content">
+        <h2 class="omnibox-title">
+          <span class="line-mask"><span class="line-inner font-light">Detecta, Analiza</span></span>
+          <span class="line-mask"><span class="line-inner"><strong>Y Decide En El Edge</strong></span></span>
+        </h2>
+      </div>
+    </section>
+
+    <!-- ── SLIDER SECTION ─────────────── -->
+    <section class="outro outro--fullvh" id="slider-interactivo">
+        <div class="outro-inner">
+            <!-- Step Slider -->
+            <div class="step-slider sr">
+                <!-- Visual area with images -->
+                <div class="step-visual">
+                    <div class="step-visual-panel active" data-step="0">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="img/discriminaphone.webp">
+                            <img src="img/Discrimina.webp" alt="Discrimina">
+                        </picture>
+                    </div>
+                    <div class="step-visual-panel" data-step="1">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="img/trackeaphone.webp">
+                            <img src="img/trackea.webp" alt="Trackea">
+                        </picture>
+                    </div>
+                    <div class="step-visual-panel" data-step="2">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="img/alertaphone.webp">
+                            <img src="img/alerta.webp" alt="Alerta">
+                        </picture>
+                    </div>
+                </div>
+
+                <!-- Step columns side-by-side -->
+                <div class="step-columns-container">
+                    <div class="step-column active" data-step="0">
+                        <button class="step-tab active" data-step="0" data-label="Discrimina">
+                            <span class="step-tab-label">Discrimina</span>
+                            <div class="step-tab-progress"><div class="step-tab-fill"></div></div>
+                        </button>
+                        <div class="step-content active" data-step="0">
+                            <p>Diferencia entre un animal, un objeto inanimado y un ser humano con precisión YOLOv8. El motor de visión procesa cada fotograma clasificando entidades en tiempo real.</p>
+                        </div>
+                    </div>
+                    <div class="step-column" data-step="1">
+                        <button class="step-tab" data-step="1" data-label="Trackea">
+                            <span class="step-tab-label">Trackea</span>
+                            <div class="step-tab-progress"><div class="step-tab-fill"></div></div>
+                        </button>
+                        <div class="step-content" data-step="1">
+                            <p>Mantiene el ID persistente del sujeto aunque se cruce con otros individuos en escena. El seguimiento inteligente garantiza continuidad sin pérdida de identidad.</p>
+                        </div>
+                    </div>
+                    <div class="step-column" data-step="2">
+                        <button class="step-tab" data-step="2" data-label="Alerta">
+                            <span class="step-tab-label">Alerta</span>
+                            <div class="step-tab-progress"><div class="step-tab-fill"></div></div>
+                        </button>
+                        <div class="step-content" data-step="2">
+                            <p>Notifica al personal vía WebSocket, reduciendo el tiempo de respuesta a milisegundos. Las alertas llegan al panel del operador en menos de 3ms.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ── FOOTER SECTION ─────────────── -->
+    <footer id="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#hero">QUE ES</a>
+          <a href="#caracteristicas">ARQUITECTURA</a>
+          <a href="#login">INICIAR SESION</a>
+          <a href="#contacto">SOPORTE</a>
+        </div>
+        
+        <div class="footer-logo">
+          <img src="logos/Isotipo.webp" alt="OmniVision" />
+        </div>
+        
+        <div class="footer-bottom">
+          <div class="footer-copyright">
+            2026 OMNIVISION - TODOS LOS DERECHOS RESERVADOS.
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-watermark">OMNIVISION</div>
+    </footer>
+
+  </div><!-- /#site -->
+
+  <script src="main.js"></script>
+</body>
+
+</html>

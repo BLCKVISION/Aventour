@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Aventour — Descubre tu próximo destino de viaje. Te guiamos en la aventura de tu vida con los mejores paquetes y destinos del mundo." />
+  <title>Aventour — ¿Dónde Será Tu Siguiente Destino?</title>
+
+  <!-- Preconnect Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- GSAP CDN (ScrollTrigger incluido — SplitText es Club GSAP, no disponible en CDN gratuito) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- Lenis Smooth Scroll CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+
+  <link rel="stylesheet" href="style.css?v=14" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="navbar__inner" aria-label="Navegación principal">
+
+      <!-- Logo -->
+      <a href="#inicio" class="navbar__logo" aria-label="Aventour inicio">
+        <img src="img/Logo.png" alt="Aventour logo" width="120" height="36" />
+      </a>
+
+      <!-- Links centrales -->
+      <ul class="navbar__links" role="list">
+        <li><a href="#inicio" class="navbar__link">Inicio</a></li>
+        <li><a href="#destinos" class="navbar__link">Destinos</a></li>
+        <li><a href="#paquetes" class="navbar__link">Paquetes</a></li>
+      </ul>
+
+      <!-- CTA -->
+      <div class="navbar__cta-wrap">
+        <a href="#contacto" class="navbar__cta" aria-label="Reservar ya">
+          Reservar Ya
+        </a>
+      </div>
+
+      <!-- Hamburger (mobile) -->
+      <button class="navbar__hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false"
+        aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="navbar__mobile" id="mobile-menu" role="dialog" aria-label="Menú móvil" hidden>
+      <ul role="list">
+        <li><a href="#inicio" class="navbar__mobile-link">Inicio</a></li>
+        <li><a href="#destinos" class="navbar__mobile-link">Destinos</a></li>
+        <li><a href="#paquetes" class="navbar__mobile-link">Paquetes</a></li>
+        <li><a href="#contacto" class="navbar__mobile-link navbar__mobile-cta">Contáctanos!</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MAIN
+  ============================================================ -->
+  <main>
+
+    <!-- =========================================================
+         HERO SECTION
+    ========================================================= -->
+    <section class="hero" id="inicio" aria-label="Hero principal">
+
+      <!-- Fondo: imagen de cielo -->
+      <div class="hero__bg" aria-hidden="true">
+        <img src="img/Hero.jpg" alt="" class="hero__bg-img" loading="eager" fetchpriority="high" />
+        <!-- Overlay suave para mejorar legibilidad del texto -->
+        <div class="hero__bg-overlay"></div>
+      </div>
+
+      <!-- Contenido del Hero -->
+      <div class="hero__content">
+
+        <!-- Headline -->
+        <h1 class="hero__title" id="hero-title">
+          <span class="hero__title-line">
+            <span class="hero__title-bold hero__title-muted">Donde Será</span>&nbsp;<span
+              class="hero__title-regular">Tu</span>
+          </span>
+          <span class="hero__title-line">
+            <span class="hero__title-regular">Siguiente</span>&nbsp;<span
+              class="hero__title-bold hero__title-muted">Destino?</span>
+          </span>
+        </h1>
+
+        <!-- Subtítulo -->
+        <p class="hero__subtitle" id="hero-subtitle">
+          estamos para guiarte en la proxima
+          <strong class="hero__subtitle-accent">aventura de tu vida</strong>
+        </p>
+
+        <!-- Thumbnails de destinos (3D Rotating Cylinder) -->
+        <div class="hero__thumbnails-scene" id="hero-thumbnails" role="region" aria-label="Destinos destacados">
+          <div class="hero__thumbnails-a3d" style="--n: 18">
+            <!-- 5 Originales -->
+            <img class="hero__thumb-img" src="img/thumbnail 1.jpg" alt="Destino 1" style="--i:0">
+            <img class="hero__thumb-img" src="img/thumbnail 2.jpeg" alt="Destino 2" style="--i:1">
+            <img class="hero__thumb-img" src="img/thumbnail 3.jpg" alt="Destino 3" style="--i:2">
+            <img class="hero__thumb-img" src="img/thumbnail 4.jpeg" alt="Destino 4" style="--i:3">
+            <img class="hero__thumb-img" src="img/thumbnail 5.jpeg" alt="Destino 5" style="--i:4">
+
+            <!-- Duplicados para completar el cilindro de 18 cartas (curva suave) -->
+            <img class="hero__thumb-img" src="img/thumbnail 1.jpg" alt="" style="--i:5">
+            <img class="hero__thumb-img" src="img/thumbnail 2.jpeg" alt="" style="--i:6">
+            <img class="hero__thumb-img" src="img/thumbnail 3.jpg" alt="" style="--i:7">
+            <img class="hero__thumb-img" src="img/thumbnail 4.jpeg" alt="" style="--i:8">
+            <img class="hero__thumb-img" src="img/thumbnail 5.jpeg" alt="" style="--i:9">
+
+            <img class="hero__thumb-img" src="img/thumbnail 1.jpg" alt="" style="--i:10">
+            <img class="hero__thumb-img" src="img/thumbnail 2.jpeg" alt="" style="--i:11">
+            <img class="hero__thumb-img" src="img/thumbnail 3.jpg" alt="" style="--i:12">
+            <img class="hero__thumb-img" src="img/thumbnail 4.jpeg" alt="" style="--i:13">
+            <img class="hero__thumb-img" src="img/thumbnail 5.jpeg" alt="" style="--i:14">
+
+            <img class="hero__thumb-img" src="img/thumbnail 1.jpg" alt="" style="--i:15">
+            <img class="hero__thumb-img" src="img/thumbnail 2.jpeg" alt="" style="--i:16">
+            <img class="hero__thumb-img" src="img/thumbnail 3.jpg" alt="" style="--i:17">
+          </div>
+        </div>
+
+        <!-- Rating -->
+        <div class="hero__rating" id="hero-rating" aria-label="Calificación 5 estrellas">
+          <p class="hero__rating-text">
+            solo con nosotros se llena las <strong class="hero__rating-accent">5 estrellas</strong>
+          </p>
+          <div class="hero__stars" aria-label="5 estrellas">
+            <span class="star" aria-hidden="true">★</span>
+            <span class="star" aria-hidden="true">★</span>
+            <span class="star" aria-hidden="true">★</span>
+            <span class="star" aria-hidden="true">★</span>
+            <span class="star" aria-hidden="true">★</span>
+          </div>
+        </div>
+
+      </div><!-- /.hero__content -->
+    </section>
+
+    <!-- ============================================================
+         SECCIÓN 2: DESTINATIONS SLIDER
+         ============================================================ -->
+    <div class="bg-grey-wrapper">
+      <section class="destinations-slider" id="destinations" aria-label="Slider de destinos">
+        <!-- Contenedor de las diapositivas (imágenes de fondo y títulos) -->
+        <div class="slider__track" id="slider-track">
+
+          <!-- Slide 1: Bali -->
+          <div class="slider__slide active">
+            <img src="img/S2 - 1.jpg" alt="Bali" class="slider__bg">
+            <div class="slider__content" id="s2-first-content" style="opacity: 0;">
+              <h2 class="slider__title">Bali</h2>
+              <p class="slider__subtitle">Experiencia Única</p>
+            </div>
+          </div>
+
+          <!-- Slide 2: Santorini -->
+          <div class="slider__slide">
+            <img src="img/S2 - 2.jpeg" alt="Santorini" class="slider__bg">
+            <div class="slider__content">
+              <h2 class="slider__title">Santorini</h2>
+              <p class="slider__subtitle">Experiencia Única</p>
+            </div>
+          </div>
+
+          <!-- Slide 3: Lençóis -->
+          <div class="slider__slide">
+            <img src="img/S2 - 3.jpeg" alt="Lençóis Maranhenses" class="slider__bg">
+            <div class="slider__content">
+              <h2 class="slider__title">Lençóis</h2>
+              <p class="slider__subtitle">Experiencia Única</p>
+            </div>
+          </div>
+
+          <!-- Slide 4: Río -->
+          <div class="slider__slide">
+            <img src="img/S2 - 4.jpg" alt="Río de Janeiro" class="slider__bg">
+            <div class="slider__content">
+              <h2 class="slider__title">Río</h2>
+              <p class="slider__subtitle">Experiencia Única</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- UI Fija sobre el slider -->
+        <div class="slider__ui">
+          <div class="section-breadcrumb">
+            <span class="breadcrumb-left">Destinos Destacados</span>
+            <span class="breadcrumb-right" id="slider-pagination">01 &nbsp;—&nbsp; 07</span>
+          </div>
+
+          <!-- Píldora inferior de beneficios -->
+          <div class="slider__pill-container">
+            <ul class="slider__pill">
+              <li class="pill-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Estancia</span>
+              </li>
+              <li class="pill-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                  <line x1="6" y1="1" x2="6" y2="4"></line>
+                  <line x1="10" y1="1" x2="10" y2="4"></line>
+                  <line x1="14" y1="1" x2="14" y2="4"></line>
+                </svg>
+                <span>Desayuno</span>
+              </li>
+              <li class="pill-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <span>Turismo</span>
+              </li>
+              <li class="pill-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Visa</span>
+              </li>
+              <li class="pill-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span>Entradas</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+         SECCIÓN 3: SEQUENCE ANIMATION (CANVAS)
+         ============================================================ -->
+      <section class="hero-sequence" id="sequence-section">
+        <!-- Breadcrumbs para S3 -->
+        <div class="section-breadcrumb">
+          <span class="breadcrumb-left">Nuestra Dirección</span>
+          <span class="breadcrumb-right">02 &nbsp;—&nbsp; 07</span>
+        </div>
+
+        <canvas id="sequence-canvas"></canvas>
+
+        <div class="sequence-overlay" id="seq-overlay-end">
+          <div class="seq-content">
+            <h2 class="seq-title">
+              <span class="seq-word"><span class="fw-semibold">Experiencias</span><br></span>
+              <span class="seq-word">inolvidables</span>
+            </h2>
+            <div class="seq-info">
+              <button class="btn btn--gradient btn--small">Reservar ahora</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div> <!-- /.bg-grey-wrapper -->
+
+    <!-- ============================================================
+       SECCIÓN 4: POR QUÉ VIAJAR CON NOSOTROS
+       ============================================================ -->
+    <section class="features-section" id="features">
+      <div class="features__bg"></div>
+      <!-- Breadcrumbs -->
+      <div class="section-breadcrumb section-breadcrumb--dark">
+        <span class="breadcrumb-left">¿Por Qué Viajar con Nosotros?</span>
+        <span class="breadcrumb-right">04 &nbsp;—&nbsp; 07</span>
+      </div>
+
+      <!-- Título arriba -->
+      <div class="features__top">
+        <h2 class="features__title">
+          <span class="fw-light text-grey">Viaja con</span> Confianza<br>
+          <span class="fw-light text-grey">y</span> Sin Preocupaciones
+        </h2>
+      </div>
+
+      <!-- Métricas abajo -->
+      <div class="features__bottom">
+        <div class="features__metrics">
+          <div class="metric">
+            <span class="metric__number text-gradient-blue" data-target="12" data-suffix="x">0x</span>
+            <span class="metric__text text-grey">sin<br>intereses</span>
+          </div>
+          <div class="metric">
+            <span class="metric__number text-gradient-blue" data-target="100" data-suffix="%">0%</span>
+            <span class="metric__text text-grey">Mejor precio<br>garantizado</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       SCROLL HORIZONTAL (S5 y S6)
+       ============================================================ -->
+    <div class="horizontal-container">
+      <div class="horizontal-wrapper">
+
+        <!-- ============================================================
+           SECCIÓN 5: NUESTRO LEMA
+           ============================================================ -->
+        <section class="lema-section" id="lema">
+          <!-- Breadcrumbs -->
+          <div class="section-breadcrumb section-breadcrumb--dark">
+            <span class="breadcrumb-left"><span class="fw-light text-grey">Nuestro</span> Lema</span>
+            <span class="breadcrumb-right">05 &nbsp;—&nbsp; 07</span>
+          </div>
+
+          <div class="lema__content">
+            <h2 class="lema__title">
+              <span class="lema-word fw-light text-grey">Desde</span>
+              <span class="lema-word fw-light text-grey">el</span>
+              <span class="lema-word">Primer</span>
+              <span class="lema-word">Paso</span>
+              <span class="lema-word fw-light text-grey">Hasta</span>
+              <span class="lema-word fw-light text-grey">el</span>
+              <span class="lema-word fw-light text-grey">Regreso</span>
+              <span class="lema-word fw-light text-grey">a</span>
+              <span class="lema-word fw-light text-grey">Casa,</span>
+              <span class="lema-word">Cuidamos</span>
+              <span class="lema-word">Cada</span>
+              <span class="lema-word">Momento.</span>
+            </h2>
+          </div>
+        </section>
+
+        <!-- ============================================================
+       SECCIÓN 6: PAQUETES
+       ============================================================ -->
+        <section class="packages-section" id="packages">
+          <!-- Breadcrumbs -->
+          <div class="section-breadcrumb section-breadcrumb--dark">
+            <span class="breadcrumb-left"><span class="fw-light text-grey">Nuestros</span> Paquetes</span>
+            <span class="breadcrumb-right">06 &nbsp;—&nbsp; 07</span>
+          </div>
+
+          <div class="packages__content">
+            <!-- COLUMNA IZQUIERDA (Tarjetas Acordeón) -->
+            <div class="packages__cards">
+
+              <!-- Elite Card (Expanded by default) -->
+              <div class="package-card is-active">
+                <div class="package-card__header">
+                  <h3 class="package-card__title"><span class="fw-light">Plan</span> Elite</h3>
+                  <span class="package-card__price">890$</span>
+                  <button class="btn btn--grey package-card__toggle">Ver más</button>
+                </div>
+                <div class="package-card__body">
+                  <div class="package-card__tags">
+                    <span class="package-tag">Hotel 5</span>
+                    <span class="package-tag">Traslados privados</span>
+                    <span class="package-tag">Guía exclusivo</span>
+                  </div>
+                  <button class="btn btn--solid-blue">Reservar ahora</button>
+                </div>
+              </div>
+
+              <!-- Premium Card -->
+              <div class="package-card">
+                <div class="package-card__header">
+                  <h3 class="package-card__title"><span class="fw-light">Plan</span> Premium</h3>
+                  <span class="package-card__price">590$</span>
+                  <button class="btn btn--grey package-card__toggle">Ver más</button>
+                </div>
+                <div class="package-card__body">
+                  <div class="package-card__tags">
+                    <span class="package-tag">Hotel 4</span>
+                    <span class="package-tag">Desayuno incluido</span>
+                  </div>
+                  <button class="btn btn--solid-blue">Reservar ahora</button>
+                </div>
+              </div>
+
+              <!-- Basico Card -->
+              <div class="package-card">
+                <div class="package-card__header">
+                  <h3 class="package-card__title"><span class="fw-light">Plan</span> Basico</h3>
+                  <span class="package-card__price">390$</span>
+                  <button class="btn btn--grey package-card__toggle">Ver más</button>
+                </div>
+                <div class="package-card__body">
+                  <div class="package-card__tags">
+                    <span class="package-tag">Hotel 3</span>
+                  </div>
+                  <button class="btn btn--solid-blue">Reservar ahora</button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- COLUMNA DERECHA (Información) -->
+            <div class="packages__info">
+              <h2 class="packages__title">
+                Tres Planes Pensados<br>
+                <span class="fw-light text-grey">para Cada Tipo de</span><br>
+                Viajero
+              </h2>
+              <p class="packages__desc text-grey">
+                Beneficios a tu medida. Experiencia premium. Una decisión <br>de distancia.
+              </p>
+              <button class="btn btn--gradient">Reservar Ahora</button>
+            </div>
+
+          </div>
+
+        </section>
+
+      </div> <!-- /horizontal-wrapper -->
+    </div> <!-- /horizontal-container -->
+
+    <!-- ============================================================
+       SECCIÓN 7: CTA FINAL
+       ============================================================ -->
+    <section class="cta-section" id="cta">
+      <div class="cta__content">
+        <h2 class="cta__title">
+          <span class="cta-word fw-light">Tu</span>
+          <span class="cta-word fw-light">Siguiente</span>
+          <span class="cta-word fw-semibold">Destino</span><br>
+          <span class="cta-word fw-semibold">Empieza</span>
+          <span class="cta-word fw-semibold">Aquí</span>
+        </h2>
+        <button class="btn btn--glass cta__btn">Reservar Ahora</button>
+      </div>
+
+      <div class="section-breadcrumb cta__breadcrumb">
+        <span class="breadcrumb-left">Nuestra Dirección</span>
+        <span class="breadcrumb-right">07 &nbsp;—&nbsp; 07</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       SECCIÓN 8: FOOTER
+       ============================================================ -->
+    <footer class="footer-section">
+      <!-- Huge Watermark -->
+      <div class="footer__watermark">Aventour</div>
+
+      <div class="footer__content">
+        <!-- Panel Izquierdo (Marca) -->
+        <div class="footer__panel footer__panel--brand">
+          <img src="img/Logo.png" alt="Aventour" class="footer__logo-img">
+          <p class="footer__tagline"><span class="fw-semibold">Tu Aventura</span> Empieza Aquí.</p>
+        </div>
+
+        <!-- Panel Derecho (Links y Formulario) -->
+        <div class="footer__panel footer__panel--links">
+          <div class="footer__columns">
+
+            <div class="footer__col">
+              <h4 class="footer__col-title">Navegacion</h4>
+              <ul class="footer__list">
+                <li><a href="#">Planes</a></li>
+                <li><a href="#">Nosotros</a></li>
+              </ul>
+            </div>
+
+            <div class="footer__col">
+              <h4 class="footer__col-title">Compañia</h4>
+              <ul class="footer__list">
+                <li><a href="#">Terminos y Condiciones</a></li>
+                <li><a href="#">Politicas de Privacidad</a></li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="footer__bottom-row">
+            <span class="footer__copyright">2026 todos los derechos reservados</span>
+
+            <div class="footer__subscribe">
+              <input type="email" class="footer__input" placeholder="Enter Email">
+              <button class="btn btn--white footer__submit">Subscribirse</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Script Principal -->
+    <script src="main.js?v=9"></script>
+</body>
+
+</html>

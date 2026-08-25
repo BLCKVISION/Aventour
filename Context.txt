@@ -1,0 +1,22 @@
+Guia de Paleta de Colores:
+
+Background general de la pagina: F4F6F5
+
+Texto en fondo azul: #FFFFFF
+
+Texto Gris: B2B2B2
+
+Texto Negro: 1F1F1F
+
+Degradado Azul 1: 48A7FF - 8DDCFF
+
+Degradado Azul 2: 48A7FF - C9EFFF
+
+
+Guia de Fuente Tipografico:
+
+Urbanist regular y semibold, en la web no utilizo más pesos asi que cuando veas un peso ligero es regular
+y cuando veas un peso más ancho en la fuente es semibold asi ya sabes cual utilizar a menos que te diga lo contrario.
+
+
+

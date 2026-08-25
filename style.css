@@ -1,0 +1,1593 @@
+/* ============================================================
+   AVENTOUR — LANDING PAGE CSS
+   Stack: Vanilla CSS con variables (:root), mobile-first
+   Tipografía: Urbanist (400 regular, 600 semibold)
+   Paleta: Context.txt
+   ============================================================ */
+
+/* ============================================================
+   1. DESIGN TOKENS
+   ============================================================ */
+:root {
+  /* Colores base */
+  --color-bg: #F4F6F5;
+  --color-text-dark: #1F1F1F;
+  --color-text-grey: #B2B2B2;
+  --color-text-white: #FFFFFF;
+
+  /* Gradientes azules */
+  --grad-blue-1-start: #48A7FF;
+  --grad-blue-1-end: #8DDCFF;
+  --grad-blue-2-start: #48A7FF;
+  --grad-blue-2-end: #C9EFFF;
+
+  --gradient-blue-1: linear-gradient(135deg, var(--grad-blue-1-start), var(--grad-blue-1-end));
+  --gradient-blue-2: linear-gradient(135deg, var(--grad-blue-2-start), var(--grad-blue-2-end));
+
+  /* Estrellas */
+  --color-star: #FDE68A;
+  /* Amarillo más suave / pálido */
+
+  /* Tipografía */
+  --font-base: 'Urbanist', sans-serif;
+  --fw-regular: 400;
+  --fw-semibold: 600;
+
+  /* Espaciados */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+
+  /* Radios */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+
+  /* Navbar */
+  --navbar-height: 70px;
+  --navbar-glass-bg: rgba(255, 255, 255, 0.18);
+  --navbar-glass-border: rgba(255, 255, 255, 0.40);
+  --navbar-blur: 18px;
+
+  /* Transiciones */
+  --transition-slow: 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-medium: 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   GLOBAL TYPOGRAPHY TWEAKS
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -3px;
+}
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-base);
+  font-weight: var(--fw-regular);
+  background-color: var(--color-bg);
+  color: var(--color-text-dark);
+  overflow-x: hidden;
+  /* Lenis necesita que el body sea scrollable */
+  height: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ============================================================
+   3. NAVBAR — GLASSMORPHISM PILL FLOTANTE CENTRADA
+      Coincide con la imagen de referencia:
+      una sola píldora compacta centrada que flota en la parte superior
+   ============================================================ */
+
+/* Wrapper posicionado fixed */
+.navbar {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  width: calc(100% - 48px);
+  max-width: 1040px;
+  /* Tamaño máximo igual al de la píldora */
+  z-index: 100;
+
+  /* Transición suave. Incluye transformX para centrado */
+  transition: transform var(--transition-slow);
+  transform: translate(-50%, 0);
+  will-change: transform;
+}
+
+/* Estado oculto — se agrega por JS cuando baja el scroll */
+.navbar.is-hidden {
+  transform: translate(-50%, calc(-100% - 28px));
+}
+
+/* ---- La píldora glassmorphism — el elemento visual real ---- */
+.navbar__inner {
+  position: relative;
+  /* Clave para el centrado absoluto de los links */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: var(--radius-full);
+  padding: 15px 40px;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 1px solid transparent;
+  box-shadow: none;
+  transition: background var(--transition-medium),
+  border var(--transition-medium),
+  box-shadow var(--transition-medium);
+}
+
+/* El cuerpo aparece cuando bajamos el scroll (clase añadida por JS) */
+.navbar.is-scrolled .navbar__inner {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow:
+    0 4px 24px rgba(30, 90, 200, 0.15),
+    0 1px 0 rgba(255, 255, 255, 0.30) inset;
+}
+
+/* ---- Logo ---- */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.navbar__logo img {
+  height: 1.5rem;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: filter 0.4s ease;
+}
+
+/* ---- Links centrales ---- */
+.navbar__links {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* Centrado matemático */
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__link {
+  font-family: var(--font-base);
+  font-weight: var(--fw-regular);
+  font-size: 0.92rem;
+  color: var(--color-text-white);
+  letter-spacing: 0.015em;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  transition: all 1s;
+}
+
+.navbar__link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+/* ---- Inversión a oscuro sobre fondos claros ---- */
+.navbar--dark-text .navbar__link {
+  color: #1a1a1a;
+}
+.navbar--dark-text .navbar__link:hover {
+  background: rgba(0, 0, 0, 0.08);
+  text-shadow: none;
+}
+.navbar--dark-text .navbar__logo img {
+  filter: brightness(0);
+}
+.navbar--dark-text .navbar__cta {
+  color: #1a1a1a;
+  border-color: rgba(26, 26, 26, 0.5);
+  background: rgba(26, 26, 26, 0.08);
+}
+.navbar--dark-text .navbar__cta:hover {
+  background: rgba(26, 26, 26, 0.15);
+}
+
+/* ---- CTA button wrapper ---- */
+.navbar__cta-wrap {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ---- CTA button ---- */
+.navbar__cta {
+  font-family: var(--font-base);
+  font-weight: var(--fw-semibold);
+  font-size: 0.88rem;
+  color: var(--color-text-white);
+  /* Botón interior con fondo un poco más opaco — efecto píldora dentro de píldora */
+  background: rgba(255, 255, 255, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.60);
+  border-radius: var(--radius-full);
+  padding: 9px 22px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.navbar__cta:hover {
+  background: rgba(255, 255, 255, 0.36);
+  border-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.navbar__cta:active {
+  transform: translateY(0);
+}
+
+/* ---- Hamburger (mobile) ---- */
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+
+.navbar__hamburger:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.navbar__hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text-white);
+  border-radius: var(--radius-full);
+  transition: transform var(--transition-medium), opacity var(--transition-medium);
+}
+
+/* Hamburger animado cuando el menú está abierto */
+.navbar__hamburger.is-active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar__hamburger.is-active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.navbar__hamburger.is-active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---- Mobile Menu ---- */
+.navbar__mobile {
+  max-width: 1200px;
+  margin: 10px auto 0;
+  background: rgba(255, 255, 255, 0.20);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--navbar-glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  overflow: hidden;
+
+  /* Animación de apertura/cierre vía max-height */
+  max-height: 0;
+  opacity: 0;
+  transition:
+    max-height var(--transition-slow),
+    opacity var(--transition-medium),
+    padding var(--transition-medium);
+}
+
+.navbar__mobile:not([hidden]) {
+  max-height: 320px;
+  opacity: 1;
+}
+
+/* Cuando tiene hidden, no transitamos */
+.navbar__mobile[hidden] {
+  display: block !important;
+  /* override HTML hidden para que funcione la transición */
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  pointer-events: none;
+}
+
+.navbar__mobile ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.navbar__mobile-link {
+  display: block;
+  font-family: var(--font-base);
+  font-weight: var(--fw-regular);
+  font-size: 1rem;
+  color: var(--color-text-white);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+
+.navbar__mobile-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.navbar__mobile-cta {
+  font-weight: var(--fw-semibold);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.40);
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* ============================================================
+   4. HERO SECTION
+   ============================================================ */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ---- Fondo imagen (cielo + nubes) ---- */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+/* Overlay muy sutil para reforzar contraste en texto */
+.hero__bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+      rgba(30, 100, 200, 0.08) 0%,
+      rgba(72, 167, 255, 0.05) 50%,
+      rgba(140, 210, 255, 0.18) 100%);
+}
+
+/* ---- Contenido principal ---- */
+.hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 24px;
+  padding-top: calc(var(--navbar-height) + 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+}
+
+/* ---- Título hero ---- */
+.hero__title {
+  font-family: var(--font-base);
+  color: var(--color-text-white);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 30px;
+  font-size: clamp(2.8rem, 6vw + 1rem, 5.2rem);
+}
+
+.hero__title-line {
+  display: block;
+}
+
+.hero__title-regular {
+  font-weight: var(--fw-regular);
+}
+
+.hero__title-bold {
+  font-weight: var(--fw-semibold);
+}
+
+.hero__title-muted {
+  opacity: 0.85;
+}
+
+/* ---- Subtítulo ---- */
+.hero__subtitle {
+  font-family: var(--font-base);
+  font-weight: var(--fw-regular);
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  color: var(--color-text-white);
+  opacity: 0.90;
+  letter-spacing: 0.01em;
+  margin-bottom: 1rem;
+  max-width: 480px;
+}
+
+.hero__subtitle-accent {
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-white);
+  /* Blanco como solicitado */
+}
+
+/* ============================================================
+   5. THUMBNAILS DE DESTINOS (3D ROTATING CYLINDER)
+   ============================================================ */
+.hero__thumbnails-scene {
+  display: grid;
+  perspective: 75em;
+  /* Curva suave tipo puente */
+  mask: linear-gradient(90deg, #0000 0%, red 5% 95%, #0000 100%);
+  width: 100%;
+  max-width: 1200px;
+  /* Más ancho para que abarque más pantalla */
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  padding: 40px 0;
+  /* Padding vertical para que las sombras y altura respiren */
+}
+
+.hero__thumbnails-a3d {
+  display: grid;
+  /* INDISPENSABLE para que todas las cartas partan del mismo punto (grid-area: 1/1) */
+  --w: 16em;
+  /* Ancho de cada tarjeta */
+  --ba: calc(1turn / var(--n));
+  --gap: 2em;
+  /* Separación para agrandar el radio */
+  --r: calc((.5 * var(--w) + .5 * var(--gap)) / tan(.5 * var(--ba)));
+
+  place-self: center;
+  transform-style: preserve-3d;
+  animation: hero-carousel-rotate 80s linear infinite;
+  /* Rotación lenta y suave */
+  transform: translateZ(calc(-1 * var(--r)));
+}
+
+@keyframes hero-carousel-rotate {
+  0% {
+    transform: translateZ(calc(-1 * var(--r))) rotateY(0turn);
+  }
+
+  100% {
+    transform: translateZ(calc(-1 * var(--r))) rotateY(1turn);
+  }
+}
+
+.hero__thumb-img {
+  grid-area: 1 / 1;
+  width: var(--w);
+  aspect-ratio: 7 / 10;
+  /* Encaja con la altura perfectamente (siempre misma proporción) */
+  object-fit: cover;
+  border-radius: 1.5em;
+  backface-visibility: hidden;
+
+  /* Sombra sutil y elegante */
+  box-shadow:
+    0 10px 30px rgba(30, 80, 180, 0.15),
+    -5px 0 20px rgba(0, 0, 0, 0.05);
+
+  /* Posición 3D en el cilindro */
+  transform:
+    rotateY(calc(var(--i) * var(--ba))) translateZ(var(--r));
+
+  /* Transición para hover */
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Efecto hover sobre la imagen frontal */
+.hero__thumb-img:hover {
+  /* Si quisiéramos resaltarla un poco: */
+  filter: brightness(1.1);
+}
+
+/* ============================================================
+   6. RATING / ESTRELLAS
+   ============================================================ */
+.hero__rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero__rating-text {
+  font-family: var(--font-base);
+  font-weight: var(--fw-regular);
+  font-size: clamp(0.78rem, 1.2vw, 0.88rem);
+  color: var(--color-text-white);
+  opacity: 0.85;
+  letter-spacing: 0.01em;
+}
+
+.hero__rating-accent {
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-white);
+  /* Texto blanco para las 5 estrellas */
+}
+
+.hero__stars {
+  display: flex;
+  gap: 5px;
+}
+
+.star {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  color: var(--color-star);
+  display: inline-block;
+  /* La animación de entrada la maneja GSAP */
+}
+
+/* ============================================================
+   7. DESTINATIONS SLIDER Y WRAPPER
+   ============================================================ */
+.bg-grey-wrapper {
+  background-color: #979598;
+  width: 100vw;
+  position: relative;
+  z-index: 10;
+  border-radius: 0 0 110px 110px;
+  overflow: hidden;
+}
+
+.destinations-slider {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0 0 110px 110px;
+  overflow: hidden;
+  background-color: #979598;
+  z-index: 10;
+}
+
+.slider__track {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.slider__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  /* Ocultas por defecto */
+  transition: opacity 1.5s ease-in-out;
+  display: flex;
+  align-items: flex-start;
+  /* Subimos el contenido */
+  justify-content: center;
+  padding-top: 15vh;
+  /* 10% más arriba de la mitad de arriba (antes 25vh) */
+}
+
+.slider__slide.active {
+  opacity: 1;
+  /* Slide visible */
+  z-index: 1;
+}
+
+.slider__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  /* Empieza desde arriba para unirse con el Hero */
+  z-index: -1;
+}
+
+.slider__content {
+  text-align: center;
+  color: var(--color-text-white);
+  z-index: 2;
+}
+
+.package-card__price {
+    font-family: var(--font-base);
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.slider__title {
+    font-family: var(--font-base);
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: var(--fw-semibold);
+    letter-spacing: -6px;
+    line-height: 1;
+    text-transform: capitalize;
+    color: #ffffff;
+    transform: translateY(30px);
+    opacity: 0;
+}
+
+.slider__subtitle {
+    font-family: var(--font-base);
+    font-weight: var(--fw-regular);
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    letter-spacing: 0.05em;
+    text-transform: capitalize;
+    margin-top: -10px;
+    color: rgba(255, 255, 255, 0.7);
+    transform: translateY(30px);
+    opacity: 0;
+}
+
+/* UI fija sobre los slides */
+.slider__ui {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  /* Dejamos que los clics pasen a través, excepto en la píldora */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(20px, 4vw, 40px);
+}
+
+/* Breadcrumbs Globales */
+.section-breadcrumb {
+  position: absolute;
+  top: clamp(20px, 4vw, 50px);
+  left: clamp(40px, 8vw, 150px);
+  right: clamp(40px, 8vw, 150px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  width: auto;
+  opacity: 0.3;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: var(--font-base);
+  font-weight: var(--fw-regular);
+  font-size: clamp(0.75rem, 1.2vw, 1.3rem);
+  text-transform: capitalize;
+  pointer-events: none;
+}
+
+.section-breadcrumb .breadcrumb-right {
+    /* font-variant-numeric: tabular-nums; */
+    /* letter-spacing: 0.2em; */
+    font-size: 1.2rem;
+}
+
+/* Contenedor de la píldora para centrarla abajo */
+.slider__pill-container {
+  display: flex;
+  justify-content: center;
+  pointer-events: auto;
+  /* Habilitar interacción aquí */
+  padding-bottom: 5vh;
+  /* Sube un 5% */
+}
+
+/* Píldora inferior Glassmorphism */
+.slider__pill {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 4vw, 50px);
+  /* Más espacio entre cada beneficio */
+  margin: 0;
+  padding: 20px 45px;
+  /* Más padding interno */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  color: var(--color-text-white);
+  font-family: var(--font-base);
+  font-size: clamp(0.85rem, 1.3vw, 1rem);
+  /* Letra un poco más grande */
+  font-weight: var(--fw-regular);
+}
+
+.slider__pill li {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  position: relative;
+  /* Oculto por defecto para animar con GSAP Stagger */
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+/* Alineación del ícono y texto */
+.pill-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  /* Íconos un poco más cerca del texto */
+}
+
+.pill-item svg {
+  opacity: 0.8;
+  width: 14px;
+  /* Íconos más pequeños */
+  height: 14px;
+}
+
+.slider__pill li:hover {
+  opacity: 0.8;
+}
+
+/* ============================================================
+   7. RESPONSIVE — TABLET (max 900px)
+   ============================================================ */
+@media (max-width: 900px) {
+  .navbar__links {
+    gap: var(--space-md);
+  }
+
+  .hero__thumbnails {
+    gap: 8px;
+  }
+
+  .thumb {
+    width: 17%;
+  }
+
+  .thumb--tall {
+    width: 20%;
+  }
+
+  .thumb--center {
+    width: 23%;
+  }
+}
+
+/* ============================================================
+   8. RESPONSIVE — MOBILE (max 640px)
+   ============================================================ */
+@media (max-width: 640px) {
+
+  /* Navbar mobile: ocultar links y mostrar hamburger */
+  .navbar__links,
+  .navbar__cta {
+    display: none;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  /* Ajuste hero */
+  .hero__content {
+    padding-top: calc(var(--navbar-height) + 40px);
+    padding-bottom: var(--space-lg);
+  }
+
+  /* Thumbnails en mobile: scroll horizontal */
+  .hero__thumbnails {
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding-bottom: 12px;
+    padding-left: 4px;
+    padding-right: 4px;
+    /* Esconder scrollbar visual */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+
+  .hero__thumbnails::-webkit-scrollbar {
+    display: none;
+  }
+
+  .thumb,
+  .thumb--tall,
+  .thumb--center {
+    flex-shrink: 0;
+    width: 120px;
+    aspect-ratio: 9 / 14;
+  }
+
+  .thumb--tall {
+    width: 130px;
+    aspect-ratio: 9 / 15;
+  }
+
+  .thumb--center {
+    width: 145px;
+    aspect-ratio: 9 / 16;
+  }
+}
+
+/* ============================================================
+   9. REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   SECCIÓN 3: SEQUENCE ANIMATION (CANVAS)
+   ============================================================ */
+.hero-sequence {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #979598;
+  border-radius: 0 0 110px 110px;
+}
+
+
+
+.hero-sequence canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sequence-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(40px, 8vw, 150px);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+  will-change: opacity, transform;
+}
+
+.seq-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  gap: 40px;
+}
+
+.seq-title {
+    font-family: var(--font-base);
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -2px;
+    flex: 1;
+    margin: 0;
+}
+
+.seq-small {
+    font-size: 0.5em;
+    display: inline-block;
+    line-height: 1.1;
+}
+
+.seq-info {
+  flex: 0 0 clamp(250px, 20vw, 300px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  line-height: 1.5;
+  font-weight: 300;
+  pointer-events: auto; /* For the button */
+}
+
+.btn--small {
+  padding: 8px 24px;
+  font-size: 0.85rem;
+  border-radius: 50px;
+}
+
+/* ============================================================
+   8. FEATURES SECTION (S4)
+   ============================================================ */
+.features-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10vh 20px 14vh 20px; /* Top a 10vh para bajar el título un poco */
+  overflow: hidden;
+}
+
+.features__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('img/S4.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.features__top, .features__bottom {
+  position: relative;
+  z-index: 1;
+}
+
+.section-breadcrumb--dark {
+  color: #a0a2a5; /* Gris para fondo claro */
+  z-index: 10;
+}
+
+.features__top {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.features__bottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.features__title {
+  font-family: var(--font-base);
+  font-size: clamp(2rem, 4vw, 3.8rem); /* Un poco más pequeño */
+  font-weight: var(--fw-semibold);
+  color: #1a1a1a;
+  text-align: center;
+  line-height: 1.1;
+  /* letter-spacing eliminado porque ahora es global */
+}
+
+.fw-light {
+  font-weight: 300;
+}
+
+.text-grey {
+  color: #9ba0a5;
+}
+
+.features__metrics {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+  gap: clamp(40px, 8vw, 120px);
+  flex-wrap: wrap;
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.metric__number {
+  font-family: var(--font-base);
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.metric__text {
+  font-family: var(--font-base);
+  font-size: clamp(0.9rem, 1.3vw, 1.2rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(180deg, #48A7FF, #8DDCFF); /* 180deg es vertical (hacia abajo): #48A7FF arriba, #8DDCFF abajo */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* ============================================================
+   9. SCROLL HORIZONTAL (S5 & S6)
+   ============================================================ */
+.horizontal-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* Hide horizontal overflow */
+  position: relative;
+  background-color: var(--color-bg);
+}
+
+.horizontal-wrapper {
+  display: flex;
+  width: 200vw; /* 2 panels of 100vw each */
+  height: 100vh;
+  will-change: transform;
+}
+
+/* ============================================================
+   10. LEMA SECTION (S5)
+   ============================================================ */
+.lema-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh; /* Updated from 70vh to 100vh */
+  flex-shrink: 0;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5vw;
+}
+
+.lema__content {
+  max-width: 1400px;
+  text-align: center;
+}
+
+.lema__title {
+  font-family: var(--font-base);
+  font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+  font-weight: var(--fw-semibold);
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.lema-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(30px); /* GSAP initial state */
+  margin-right: 0.15em;
+}
+
+/* ============================================================
+   11. PACKAGES SECTION (S6)
+   ============================================================ */
+.packages-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10vh 5vw;
+}
+
+.packages__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8vw;
+  width: 100%;
+  max-width: 1400px;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.packages__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.package-card {
+  border-radius: 28px;
+  padding: 30px 40px;
+  background: #fff;
+  color: #1a1a1a;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Sombra leve */
+  transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Pseudo-element for the gradient background transition */
+.package-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('img/Fondo Cards.png') no-repeat center/cover;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Hover effect on inactive cards (optional micro-interaction) */
+.package-card:not(.is-active):hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.06);
+}
+
+/* Active State (Accordion Expanded) */
+.package-card.is-active {
+  color: #fff;
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(72, 167, 255, 0.35);
+}
+
+.package-card.is-active::before {
+  opacity: 1;
+}
+
+.package-card__header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.package-card__title {
+    font-family: var(--font-base);
+    font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+    font-weight: var(--fw-semibold);
+    margin: 0px;
+    letter-spacing: -1px;
+}
+
+.package-card__price {
+  font-family: var(--font-base);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 500;
+}
+
+/* Ocultar / Mostrar el botón Ver Más vs el Precio dependiendo del estado */
+.package-card:not(.is-active) .package-card__price { display: none; }
+.package-card:not(.is-active) .package-card__toggle { display: block; }
+
+.package-card.is-active .package-card__price { display: block; }
+.package-card.is-active .package-card__toggle { display: none; }
+
+/* Accordion Body */
+.package-card__body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1); /* Transición más suave */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px;
+  margin-top: 0;
+}
+
+.package-card.is-active .package-card__body {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 25px;
+}
+
+.package-card__price {
+  font-family: var(--font-base);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 500;
+}
+
+.package-card__tags {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.package-tag {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-family: var(--font-base);
+  font-weight: 400;
+}
+
+.btn {
+  border: none;
+  border-radius: 50px;
+  padding: 12px 30px;
+  font-family: var(--font-base);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.btn:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.btn--white {
+  background: #fff;
+  color: var(--grad-blue-1-start);
+}
+
+.btn--white:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.btn--solid-blue {
+    background: rgba(255, 255, 255, 0.3);
+    color: rgb(255, 255, 255);
+    border-width: medium;
+    border-style: none;
+    border-color: currentcolor;
+    border-image: none;
+    box-shadow: rgba(93, 178, 255, 0.3) 0px 5px 15px;
+}
+
+.btn--solid-blue:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.btn--glass {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow:
+    0 4px 24px rgba(30, 90, 200, 0.15),
+    0 1px 0 rgba(255, 255, 255, 0.30) inset;
+}
+
+.btn--grey {
+  background: #EAECEB;
+  color: #a0a2a5;
+}
+
+.btn--gradient {
+  background: 
+    linear-gradient(90deg, rgba(72, 167, 255, 0.5), rgba(53, 128, 200, 0.5)),
+    url('img/Fondo Cards.png') no-repeat center/cover;
+  background-blend-mode: overlay;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(72, 167, 255, 0.3);
+  padding: 18px 45px;
+  font-size: 1.1rem;
+}
+
+.packages__info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.packages__title {
+    font-family: var(--font-base);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: var(--fw-semibold);
+    color: rgb(26, 26, 26);
+    line-height: 1.1;
+    letter-spacing: -3px;
+    margin: 0px;
+}
+
+.packages__desc {
+  font-family: var(--font-base);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   12. CTA SECTION (S7)
+   ============================================================ */
+.cta-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('img/CTA.png');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+    border-bottom-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+    z-index: 5;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.cta__content {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 3vh;
+    z-index: 2;
+}
+
+.cta__title {
+    font-family: var(--font-base);
+    font-size: clamp(3rem, 6vw, 4rem);
+    color: #fff;
+    line-height: 1;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.cta-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+    margin-right: 0.2em;
+}
+
+.cta__breadcrumb {
+    top: auto;
+    bottom: clamp(20px, 4vw, 50px);
+    opacity: 0; /* JS Fade in */
+}
+
+.cta__btn {
+    margin-top: 4.5vh;
+}
+
+.btn--glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transition: all 0.4s ease;
+  padding: 15px 45px;
+  font-size: 1.1rem;
+}
+
+.btn--glass:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+}
+
+/* ============================================================
+   13. FOOTER (S8)
+   ============================================================ */
+.footer-section {
+  position: relative;
+  width: 100vw;
+  background: 
+    linear-gradient(to bottom, rgba(53, 128, 200, 0.2), rgba(53, 128, 200, 0.4)),
+    url('img/Hero.jpg');
+  background-size: cover;
+  background-position: top center;
+  padding: 180px clamp(40px, 8vw, 150px) 150px clamp(40px, 8vw, 150px);
+  margin-top: -80px; /* Slides under the CTA rounded border */
+  z-index: 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.footer__watermark {
+    position: absolute;
+    bottom: -1.5vw;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-base);
+    font-size: 22vw;
+    font-weight: 500;
+    letter-spacing: -10px;
+    color: #fff;
+    opacity: 0.12;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    line-height: 0.7;
+}
+
+.footer__content {
+  display: flex;
+  gap: 25px;
+  width: 100%;
+  max-width: none;
+  position: relative;
+  z-index: 2;
+}
+
+.footer__panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 35px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__panel--brand {
+  flex: 1;
+  justify-content: space-between;
+  min-height: 380px;
+  background: linear-gradient(135deg, rgba(30, 90, 200, 0.4), rgba(53, 128, 200, 0.1));
+  border-radius: 35px;
+}
+
+.footer__logo-img {
+    width: auto;
+    max-width: 15rem;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.footer__tagline {
+  font-size: 1.1rem;
+  color: #fff;
+  margin: 0;
+}
+
+.footer__panel--links {
+  flex: 2.2;
+  justify-content: space-between;
+}
+
+.footer__columns {
+  display: flex;
+  gap: 300px;
+}
+
+.footer__col-title {
+  color: #fff;
+  font-size: 1.2rem;
+  letter-spacing: 0px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.footer__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer__list a {
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+  font-weight: lighter !important;
+  letter-spacing: 0px !important;
+}
+
+.footer__list a:hover {
+  color: #fff;
+}
+
+.footer__bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 60px;
+}
+
+.footer__copyright {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+}
+
+.footer__subscribe {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  padding: 5px;
+  align-items: center;
+  width: 100%;
+  max-width: 400px; /* Incrementado para evitar que el botón se comprima */
+  transition: all 0.3s ease;
+}
+
+.footer__subscribe:hover, .footer__subscribe:focus-within {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 15px rgba(93, 178, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.footer__input {
+  font-family: var(--font-base);
+  background: transparent;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 0.95rem;
+  flex: 1;
+  outline: none;
+  min-width: 0; /* Previene desbordamiento en flex */
+}
+
+.footer__input::placeholder {
+  font-family: var(--font-base);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer__submit {
+  font-family: var(--font-base);
+  padding: 10px 25px;
+  font-size: 0.9rem;
+  white-space: nowrap; /* Evita que "Subscribirse" se rompa en varias líneas */
+  border-radius: 50px;
+}
