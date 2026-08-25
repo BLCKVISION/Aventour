@@ -7,6 +7,12 @@
 
 window.addEventListener('DOMContentLoaded', () => {
 
+  // Forzar que la página siempre cargue arriba para que el preloader funcione bien
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+
   // Registrar plugins GSAP (solo los disponibles en CDN gratuito)
   gsap.registerPlugin(ScrollTrigger);
 
