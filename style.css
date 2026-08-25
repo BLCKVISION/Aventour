@@ -428,7 +428,7 @@ ul {
   width: 100%;
   max-width: 1200px;
   padding: 0 24px;
-  padding-top: calc(var(--navbar-height) + 120px);
+  padding-top: calc(var(--navbar-height) + 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -440,7 +440,7 @@ ul {
 .hero__title {
   font-family: var(--font-base);
   color: var(--color-text-white);
-  line-height: 0.95;
+  line-height: 0.90;
   letter-spacing: -0.02em;
   margin-bottom: 30px;
   font-size: clamp(2.8rem, 6vw + 1rem, 5.2rem);
@@ -663,15 +663,16 @@ ul {
 }
 
 .slider__title {
-  font-family: var(--font-base);
-  font-size: clamp(4rem, 12vw, 10rem);
-  font-weight: var(--fw-semibold);
-  letter-spacing: -6px;
-  line-height: 1;
-  text-transform: capitalize;
-  color: #ffffff;
-  transform: translateY(30px);
-  opacity: 0;
+    font-family: var(--font-base);
+    font-size: clamp(4rem, 12vw, 50rem);
+    font-weight: var(--fw-semibold);
+    letter-spacing: -6px;
+    line-height: 1;
+    text-transform: capitalize;
+    color: #ffffff;
+    transform: translateY(30px);
+    opacity: 0.3 !important;
+    mix-blend-mode: overlay;
 }
 
 .slider__subtitle {
