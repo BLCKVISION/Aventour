@@ -1355,15 +1355,14 @@ ul {
     height: 100vh;
     background-image: url('img/CTA.png');
     background-size: cover;
-    background-position: top center;
+    background-position: bottom center;
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
     padding: 20px;
-    border-bottom-left-radius: 80px;
-    border-bottom-right-radius: 80px;
+    border-radius: 80px;
     z-index: 5;
     box-shadow: 0 20px 50px rgba(0,0,0,0.1);
     overflow: hidden;
