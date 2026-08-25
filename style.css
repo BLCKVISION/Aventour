@@ -113,6 +113,44 @@ ul {
 }
 
 /* ============================================================
+   PRELOADER
+   ============================================================ */
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.preloader-bg,
+.preloader-overlay {
+  display: none;
+}
+
+.preloader-logo {
+  position: relative;
+  z-index: 3;
+  font-family: var(--font-base);
+  font-size: 3rem;
+  /* Tamaño solicitado */
+  letter-spacing: -3px;
+  /* Espaciado solicitado */
+  color: #fff;
+  display: flex;
+  overflow: hidden;
+  font-weight: 500;
+}
+
+.preloader-char {
+  display: inline-block;
+}
+
+/* ============================================================
    3. NAVBAR — GLASSMORPHISM PILL FLOTANTE CENTRADA
       Coincide con la imagen de referencia:
       una sola píldora compacta centrada que flota en la parte superior
@@ -663,16 +701,16 @@ ul {
 }
 
 .slider__title {
-    font-family: var(--font-base);
-    font-size: clamp(4rem, 12vw, 50rem);
-    font-weight: var(--fw-semibold);
-    letter-spacing: -6px;
-    line-height: 1;
-    text-transform: capitalize;
-    color: #ffffff;
-    transform: translateY(30px);
-    opacity: 0.3 !important;
-    mix-blend-mode: overlay;
+  font-family: var(--font-base);
+  font-size: clamp(4rem, 12vw, 50rem);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -6px;
+  line-height: 1;
+  text-transform: capitalize;
+  color: #ffffff;
+  transform: translateY(30px);
+  opacity: 0.3 !important;
+  mix-blend-mode: overlay;
 }
 
 .slider__subtitle {
@@ -1634,3 +1672,24 @@ ul {
   /* Evita que "Subscribirse" se rompa en varias líneas */
   border-radius: 50px;
 }
+/* ============================================================
+   SCROLLBAR MINIMALISTA & PRELOADER TWEAKS
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+.preloader-char:first-child {
+  margin-right: -4px;
+}
+

@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
   // Evitar Flash of Unstyled Content (elementos visibles antes del scroll)
-  gsap.set('.features__bg, .features__title, .metric, .package-card, .packages__info > *, .cta__breadcrumb, .footer__watermark, .footer__panel, .footer__bottom-row', { opacity: 0 });
+  gsap.set('.hero__subtitle, .features__bg, .features__title, .metric, .package-card, .packages__info > *, .cta__breadcrumb, .footer__watermark, .footer__panel, .footer__bottom-row', { opacity: 0 });
 
   // ─────────────────────────────────────────────────────────────────────────
   // 1. LENIS — Smooth Scroll
@@ -97,10 +97,47 @@ window.addEventListener('DOMContentLoaded', () => {
     // Animamos el contenido interno (spans) desde abajo hacia arriba.
     const titleLines = gsap.utils.toArray('.hero__title-line');
 
-    // Timeline principal del Hero
+    // ============================================================
+    // PRELOADER ANIMATION
+    // ============================================================
+    // Detener el scroll nativo de lenis durante el preloader
+    lenis.stop();
+    document.body.style.overflow = 'hidden';
+
+    // Timeline principal del Hero (Pausada inicialmente)
     const heroTL = gsap.timeline({
       defaults: { ease: 'power3.out' },
+      paused: true
     });
+
+    const preloaderTL = gsap.timeline({
+      onComplete: () => {
+        // Desvanecer preloader y arrancar hero
+        gsap.to('#preloader', {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            document.getElementById('preloader').style.display = 'none';
+            document.body.style.overflow = '';
+            lenis.start();
+            heroTL.play();
+          }
+        });
+      }
+    });
+
+    preloaderTL.fromTo('.preloader-char',
+      { yPercent: -100, opacity: 0 },
+      {
+        yPercent: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'back.out(1.5)'
+      }
+    )
+    .to({}, { duration: 0.8 }); // Pausa para que se lea antes de desvanecer
 
     // ── Navbar: Animación stagger (Logo, Links, CTA) ──────────────────────
     heroTL.fromTo(
@@ -136,7 +173,15 @@ window.addEventListener('DOMContentLoaded', () => {
       0.2
     );
 
-    // ── Thumbnails: Fade in de la escena 3D ────────────────────────
+    // ── Subtítulo: Fade in desde abajo ──────────────────────────────────────
+    heroTL.fromTo(
+      '.hero__subtitle',
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
+      "-=0.8"
+    );
+
+    // ── Thumbnails: Fade in de la escena 3D ────────────────────────────────
     heroTL.fromTo(
       '.hero__thumbnails-scene',
       { opacity: 0, y: 50 },
