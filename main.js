@@ -385,7 +385,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const frameCount = 227;
       const currentFrame = (index) => {
           const frameNum = index + 1;
-          return `img/Vid/${frameNum.toString().padStart(3, "0")}.png`;
+          return `img/Vid/${frameNum.toString().padStart(3, "0")}.webp`;
       };
 
       let images = [];
