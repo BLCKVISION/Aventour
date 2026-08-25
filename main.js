@@ -27,6 +27,14 @@ window.addEventListener('DOMContentLoaded', () => {
     wheelMultiplier: 1.2, // Rueda un poco más ágil
   });
 
+  // Forzar a Lenis al top inmediatamente
+  lenis.scrollTo(0, { immediate: true });
+
+  // Engañar al navegador para que guarde 0 como posición al refrescar
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  };
+
   // Usamos el bucle nativo (requestAnimationFrame) en lugar de gsap.ticker 
   // para evitar conflicto de frames y esa sensación pegajosa.
   lenis.on('scroll', ScrollTrigger.update);
